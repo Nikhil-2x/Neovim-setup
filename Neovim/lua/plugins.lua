@@ -370,6 +370,33 @@ require("lazy").setup({
 },
 
 
+ -- Git integration
+{
+  "lewis6991/gitsigns.nvim",
+  config = function()
+    require("gitsigns").setup({
+      signs = {
+        add = { text = "│" },
+        change = { text = "│" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+      },
+      current_line_blame = true,  -- Show blame on current line
+      current_line_blame_opts = {
+        delay = 500,  -- Show after 0.5s
+      },
+    })
+  end,
+},
+
+{
+  "kdheepak/lazygit.nvim",
+  cmd = "LazyGit",
+  dependencies = { "nvim-lua/plenary.nvim" },
+},
+
+
   -- Other plugins
   { "akinsho/bufferline.nvim", config = function() require("bufferline").setup() end },
   {

@@ -1,0 +1,116 @@
+[[language]]
+name = "typescript"
+language-servers = ["ts-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.ts"] }
+
+[[language]]
+name = "tsx"
+language-servers = ["ts-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.tsx"] }
+
+
+
+
+
+[[language]]
+name = "javascript"
+language-servers = ["ts-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.js"] }
+
+[[language]]
+name = "jsx"
+language-servers = ["ts-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.jsx"] }
+
+
+
+[[language]]
+name = "html"
+language-servers = ["html-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.html"] }
+
+
+
+[[language]]
+name = "css"
+language-servers = ["css-ls"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "file.css"] }
+
+
+[[language]]
+name = "json"
+language-servers = ["json-ls"]
+
+
+[[language]]
+name = "html"
+language-servers = ["html-ls", "tailwindcss-ls"]
+
+[[language]]
+name = "tsx"
+language-servers = ["ts-ls", "tailwindcss-ls"]
+
+[[language]]
+name = "jsx"
+language-servers = ["ts-ls", "tailwindcss-ls"]
+
+
+
+
+#cpp
+[[language]]
+name = "cpp"
+language-servers = ["clangd"]
+auto-format = true
+formatter = { command = "astyle", args = ["--style=google", "--mode=c", "--suffix=none"] }
+
+#c
+[[language]]
+name = "c"
+language-servers = ["clangd"]
+auto-format = true
+formatter = { command = "astyle", args = ["--style=google", "--mode=c", "--suffix=none"] }
+
+
+
+
+
+
+
+[language-server.ts-ls]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.html-ls]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+[language-server.css-ls]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+[language-server.json-ls]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+
+#cpp
+[language-server.clangd]
+command = "clangd"
+args = [
+  "--background-index",
+  "--clang-tidy",
+  "--completion-style=detailed",
+  "--header-insertion=never"          
+]

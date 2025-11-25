@@ -76,3 +76,15 @@ vim.keymap.set("n", "<leader>tn", ":1ToggleTerm direction=horizontal<CR>", { des
 vim.keymap.set("n", "<leader>tp", ":2ToggleTerm direction=horizontal<CR>ipython<CR>", { desc = "Python REPL" })
 
 
+-- GitSigns navigation
+vim.keymap.set("n", "]c", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next git change" })
+vim.keymap.set("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous git change" })
+
+-- GitSigns actions
+vim.keymap.set("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Stage hunk" })
+vim.keymap.set("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset hunk" })
+vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview hunk" })
+vim.keymap.set("n", "<leader>hb", "<cmd>Gitsigns blame_line<CR>", { desc = "Blame line" })
+
+-- LazyGit
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
