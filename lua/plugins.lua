@@ -40,36 +40,7 @@ require("lazy").setup({
   },
 
   -- Themes
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa").setup({
-        transparent = true,
-        dimInactive = true,
-        terminalColors = true,
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = false },
-          functions = { bold = true },
-        },
-        overrides = function(colors)
-          return {
-            NormalFloat = { bg = "none" },
-            FloatBorder = { bg = "none", fg = colors.theme.ui.fg_dim },
-            FloatTitle  = { bg = "none", fg = colors.theme.ui.special },
-            TelescopeTitle = { fg = colors.palette.springViolet1, bold = true },
-            TelescopePromptNormal = { bg = colors.theme.ui.bg_p1 },
-            TelescopePromptBorder = { fg = colors.theme.ui.bg_p1, bg = colors.theme.ui.bg_p1 },
-            TelescopeResultsNormal = { bg = colors.theme.ui.bg_m1 },
-            TelescopeResultsBorder = { fg = colors.theme.ui.bg_m1, bg = colors.theme.ui.bg_m1 },
-            TelescopePreviewNormal = { bg = colors.theme.ui.bg_dim },
-            TelescopePreviewBorder = { fg = colors.theme.ui.bg_dim, bg = colors.theme.ui.bg_dim },
-          }
-        end,
-      })
-      -- vim.cmd("colorscheme kanagawa")
-    end
-  },
+  
   {
     "sainnhe/sonokai",
     -- lazy = false,
@@ -80,32 +51,28 @@ require("lazy").setup({
       --[[ vim.cmd.colorscheme('sonokai') ]]
     end
   },
-  {
-    "scottmckendry/cyberdream.nvim",
-    config = function()
-      require('cyberdream').setup({
-         transparent = true,
-      })
-    end
-},
 {
-  "nyoom-engineering/oxocarbon.nvim"
-},
-  
-{
-  "bluz71/vim-moonfly-colors",
+  "Shatur/neovim-ayu",
   config = function()
-    vim.g.moonflyNormalFloat = true
-    vim.g.moonflyTransparent = true
-    vim.cmd("colorscheme moonfly")
-  end,
+    require("ayu").setup({
+      mirage = false,      -- set false for normal Ayu Dark
+      overrides = {
+      },     -- optional overrides
+    })
+
+    -- vim.cmd("colorscheme ayu-mirage")  
+     vim.cmd("colorscheme ayu-dark")
+    -- OR: vim.cmd("colorscheme ayu-light")
+  end
 },
+
 
 
 
   -- Dashboard / UI
 {
     "folke/snacks.nvim",
+    priority = 1000,
     lazy = false,
     opts = {
         dashboard = {
@@ -438,43 +405,56 @@ require("lazy").setup({
   { "williamboman/mason.nvim", build = ":MasonUpdate", config = function() require("mason").setup() end },
    { "williamboman/mason-lspconfig.nvim" },
    -- LSP setup
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-      local mason_lspconfig = require("mason-lspconfig")
-      local lspconfig = require("lspconfig")
-
-      mason_lspconfig.setup {
-        ensure_installed = { "clangd", "lua_ls", "pyright","ts_ls","tailwindcss","eslint" },
-        automatic_installation = true,
-      }
-    
-      -- Manually loop over installed servers
-for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
-  lspconfig[server].setup {
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  }
-end
-      
-    end
+--   {
+--     "neovim/nvim-lspconfig",
+--     dependencies = {
+--       "williamboman/mason.nvim",
+--       "williamboman/mason-lspconfig.nvim",
+--     },
+--     config = function()
+--       local mason_lspconfig = require("mason-lspconfig")
+--       local lspconfig = require("lspconfig")
+--
+--       mason_lspconfig.setup {
+--         ensure_installed = { "clangd", "lua_ls", "pyright","ts_ls","tailwindcss","eslint" },
+--         automatic_installation = true,
+--       }
+--     
+--       -- Manually loop over installed servers
+-- for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
+--   lspconfig[server].setup {
+--     capabilities = require("cmp_nvim_lsp").default_capabilities(),
+--   }
+-- end
+--       
+--     end
+--   },
+-- LSP setup
+{
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
   },
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   version = "*",
-  --   config = function()
-  --     require("toggleterm").setup({
-  --       shell = "/usr/bin/zsh",
-  --       direction = "horizontal",
-  --       float_opts = { border = "curved" },
-  --       open_mapping = [[<leader>`]],
-  --       insert_mappings = true,
-  --     })
-  --   end
-  -- },
+  config = function()
+    -- Get default capabilities for LSP
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    -- Setup mason-lspconfig with handlers
+    require("mason-lspconfig").setup({
+      ensure_installed = { "clangd", "lua_ls", "pyright", "ts_ls", "tailwindcss", "eslint" },
+      automatic_installation = true,
+      handlers = {
+        -- Default handler for all servers
+        function(server_name)
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+          })
+        end,
+      },
+    })
+  end,
+},
 
   {
   "akinsho/toggleterm.nvim",
