@@ -90,11 +90,7 @@ vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
--- Quick save (CRITICAL)
-vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file" })
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { desc = "Save in insert mode" })
-
-vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { desc = "Exit terminal mode (keep open)" })
+-- vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { desc = "Exit terminal mode (keep open)" })
 
 -- Quick save
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file" })
@@ -144,9 +140,3 @@ vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertical" })
 vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split horizontal" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Equal split sizes" })
 vim.keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close split" })
-
--- Resize splits
-vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase height" })
-vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease height" })
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease width" })
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase width" })
